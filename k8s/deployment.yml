@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dental-clinic-app
+  name: dental-clinic-app
+  namespace: dental-clinic-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dental-clinic-app
+  template:
+    metadata:
+      labels:
+        app: dental-clinic-app
+    spec:
+      containers:
+        - name: dental-clinic-app
+          image: 412631849473.dkr.ecr.ap-southeast-2.amazonaws.com/dental-clinic-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: VITE_PORT
+              value: "3000"
+            - name: VITE_API_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: port-secrets
+                  key: VITE_API_BASE_URL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dental-clinic-app
+  name: dental-clinic-app
+  namespace: dental-clinic-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: dental-clinic-app
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
