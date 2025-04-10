@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://a4cbfd3130c094423b2aceb252832a9e-260997032.ap-southeast-2.elb.amazonaws.com';
+const API_BASE_URL = 'http://dental-clinic-api.myprofilely.com';
 
 export const apiAuthPost = async (endpoint: string, body: any) => {
   try {

@@ -1,5 +1,5 @@
 export const checkAuthStatus = async (): Promise<{ isAuthenticated: boolean, user?: any }> => {
-  const apiBaseUrl = 'http://a4cbfd3130c094423b2aceb252832a9e-260997032.ap-southeast-2.elb.amazonaws.com';
+  const apiBaseUrl = 'http://dental-clinic-api.myprofilely.com';
 
   try {
     let response = await fetch(`${apiBaseUrl}/api/auth/authenticate`, {
