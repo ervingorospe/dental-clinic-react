@@ -1,5 +1,5 @@
 export const checkAuthStatus = async (): Promise<{ isAuthenticated: boolean, user?: any }> => {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiBaseUrl = 'http://a4cbfd3130c094423b2aceb252832a9e-260997032.ap-southeast-2.elb.amazonaws.com';
 
   try {
     let response = await fetch(`${apiBaseUrl}/api/auth/authenticate`, {

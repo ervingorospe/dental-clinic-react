@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = 'http://a4cbfd3130c094423b2aceb252832a9e-260997032.ap-southeast-2.elb.amazonaws.com';
 
 export const apiAuthPost = async (endpoint: string, body: any) => {
   try {
