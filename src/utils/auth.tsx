@@ -1,5 +1,5 @@
 export const checkAuthStatus = async (): Promise<{ isAuthenticated: boolean, user?: any }> => {
-  const apiBaseUrl = 'http://dental-clinic-api.myprofilely.com';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   try {
     let response = await fetch(`${apiBaseUrl}/api/auth/authenticate`, {
