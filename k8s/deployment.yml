@@ -19,12 +19,12 @@ spec:
         - name: dental-clinic-app
           image: 412631849473.dkr.ecr.ap-southeast-2.amazonaws.com/dental-clinic-app:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 8000
           env:
             - name: NODE_ENV
               value: "production"
             - name: VITE_PORT
-              value: "3000"
+              value: "8000"
             - name: VITE_API_BASE_URL
               valueFrom:
                 secretKeyRef:
@@ -39,11 +39,16 @@ metadata:
     app: dental-clinic-app
   name: dental-clinic-app
   namespace: dental-clinic-app
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-subnets: "subnet-xxxxxx,subnet-yyyyyy"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 spec:
   type: LoadBalancer
   selector:
     app: dental-clinic-app
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 80
+      targetPort: 8000
