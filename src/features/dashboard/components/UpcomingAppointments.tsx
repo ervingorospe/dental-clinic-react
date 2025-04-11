@@ -50,7 +50,7 @@ const UpcomingAppointments = () => {
                   </div>
                   <div className="flex items-center space-x-8 z-20">
                     <span className="hidden md:block text-xs px-2 py-2 bg-green-400 rounded-full text-gray-700 lowercase">{ data.status }</span>
-                    <MenuDropdown appointmentId={data.id}/>
+                    <MenuDropdown appointment={data}/>
                   </div>
                 </div>
               </li>

@@ -36,6 +36,9 @@ const FeaturedUsers = () => {
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Contact
             </th>
+            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+              
+            </th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
@@ -46,6 +49,7 @@ const FeaturedUsers = () => {
               </td>
               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500">{user.email}</td>
               <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500">{user.phoneNumber}</td>
+              <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-500">{user.role}</td>
             </tr>
           ))}
 

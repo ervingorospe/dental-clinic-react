@@ -1,12 +1,15 @@
+import { useState } from 'react'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import React from 'react';
+import CancellationModal from '@features/dashboard/components/CancellationModal'
 
 interface MenuDropdownProps {
-  appointmentId: number;
+  appointment: any;
 }
 
-const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointmentId }) => {
-  console.log(appointmentId);
+const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointment }) => {
+  const [open, setOpen] = useState(false)
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -37,14 +40,16 @@ const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointmentId }) => {
           </a>
         </MenuItem>
         <MenuItem>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+          <button
+            onClick={() => setOpen(true)}
+            className="block px-4 py-2 text-sm text-left cursor-pointer text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden w-full"
           >
             Cancel
-          </a>
+          </button>
         </MenuItem>
       </MenuItems>
+
+      <CancellationModal open={open} setOpen={setOpen} appointment={appointment}/>
     </Menu>
   )
 }
