@@ -2,11 +2,20 @@ import React, { createContext, useContext, useState, useEffect, ReactNode  } fro
 import { checkAuthStatus } from '@utils/auth'
 import { apiAuthLogout } from '@features/auth/api/auth'
 
+interface IUser {
+  userDetails: {
+    firstName: string;
+    lastName: string;
+    phoneNumber:string;
+    birthDate: string;
+  }
+} 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: any;
   login: () => void;
   logout: () => void;
+  updateUser: (data: IUser) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -31,6 +40,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children } : any) =>
   useEffect(() => {
     const getAuthStatus = async () => {
       const status = await checkAuthStatus();
+      
       if (status.isAuthenticated) {
         setIsAuthenticated(true);
         setUser(status.user);
@@ -47,6 +57,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children } : any) =>
   const login = () => {
     setIsAuthenticated(true);
   };
+
+  const updateUser = (data : IUser) => {
+    setUser({...user, ...data.userDetails})
+  }
 
   const logout = async () => {
     const response = await apiAuthLogout('/api/auth/logout');
@@ -66,7 +80,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children } : any) =>
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

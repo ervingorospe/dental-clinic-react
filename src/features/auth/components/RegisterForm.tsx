@@ -6,6 +6,18 @@ import { apiAuthPost } from '@features/auth/api/auth'
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 
+interface IRegister {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  userDetails: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    birthDate: Date;
+  }
+}
+
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
@@ -13,7 +25,7 @@ const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IRegister) => {
     setLoading(true);
     try {
       const response = await apiAuthPost('/api/users/register', data)
@@ -89,7 +101,7 @@ const RegisterForm = () => {
            {errors.userDetails?.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.userDetails.phoneNumber.message}</p>}
         </div>
 
-        {/* Phone number Input */}
+        {/* Birthdate Input */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Birthdate</label>
           <input

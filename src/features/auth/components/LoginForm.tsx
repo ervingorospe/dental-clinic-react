@@ -5,15 +5,19 @@ import { apiAuthPost } from '@features/auth/api/auth'
 import { useAuth } from '@context/AuthContext';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+interface ILogin {
+  email: string;
+  password: string;
+}
 
 const LoginForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { login } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm<ILogin>({
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: ILogin) => {
     setLoading(true);
     try {
       const response = await apiAuthPost('/api/auth/login', data)

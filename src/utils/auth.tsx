@@ -1,6 +1,5 @@
 export const checkAuthStatus = async (): Promise<{ isAuthenticated: boolean, user?: any }> => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
-  console.log(apiBaseUrl);
 
   try {
     let response = await fetch(`${apiBaseUrl}/api/auth/authenticate`, {
@@ -26,9 +25,7 @@ export const checkAuthStatus = async (): Promise<{ isAuthenticated: boolean, use
     }
     
     if (response.ok) {
-      const data = await response.json();
-
-      return data;
+      return await response.json();;
     } else {
       return { isAuthenticated: false };
     }

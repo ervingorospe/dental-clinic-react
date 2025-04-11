@@ -28,7 +28,8 @@
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
       "@context/*": ["context/*"],
-      "@layouts/*": ["layouts/*"]
+      "@layouts/*": ["layouts/*"],
+      "@pages/*": ["pages/*"]
     }
   },
   "include": ["src/**/*","vite.config.ts","vite-env.d.ts"]

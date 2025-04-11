@@ -19,7 +19,8 @@ export default defineConfig(({ mode }) => {
         '@routes': path.resolve(__dirname, 'src/routes'),
         '@utils': path.resolve(__dirname, 'src/utils'),
         "@context": path.resolve(__dirname, 'src/context'),
-        "@layouts": path.resolve(__dirname, 'src/layouts')
+        "@layouts": path.resolve(__dirname, 'src/layouts'),
+        "@pages": path.resolve(__dirname, 'src/pages')
       },
     },
   };

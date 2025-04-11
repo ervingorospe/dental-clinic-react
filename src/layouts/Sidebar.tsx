@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const mainMenu = [
   {
@@ -47,12 +48,12 @@ const Sidebar = () => {
             <i className="fas fa-bars"></i>
           </button>
 
-          <a
-            href="/"
+          <Link
+            to="/"
             className="lg:mt-8 text-gray-800 mr-0 inline-block text-left text-2xl font-bold whitespace-nowrap md:block"
           >
             Dental Clinic
-          </a>
+          </Link>
           <div
             className={
               'absolute top-0 right-0 left-0 z-40 h-auto flex-1 items-center overflow-x-hidden overflow-y-auto rounded shadow md:relative md:mt-4 md:flex md:flex-col md:items-stretch md:opacity-100 md:shadow-none ' +
@@ -62,12 +63,12 @@ const Sidebar = () => {
             <div className="block md:hidden md:min-w-full">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <a
-                    href="/"
+                  <Link
+                    to="/"
                     className="text-gray-800 mr-0 inline-block px-0 text-left text-sm font-bold whitespace-nowrap md:block"
                   >
                     Dental Clinic
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex w-6/12 justify-end">
                   <button
@@ -86,12 +87,12 @@ const Sidebar = () => {
             <ul className="mt-4 lg:mt-6 flex list-none flex-col md:min-w-full md:flex-col">
               {mainMenu?.map((menu: any) => (
                 <li className="items-center border-b last:border-0 border-gray-300" key={menu.title}>
-                  <a
-                    href={menu.route}
+                  <Link
+                    to={menu.route}
                     className={`block py-3 font-semibold tracking-wide ${location.pathname === menu.route ? 'text-green-600' : 'text-gray-600'} hover:text-green-600`}
                   >
                     <i className={`${menu.icon} mr-2`}></i> {menu.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
