@@ -3,18 +3,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '@auth/validation'
 import { apiAuthPost } from '@features/auth/api/auth'
 import { useAuth } from '@context/AuthContext';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const LoginForm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const { login } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginSchema),
   });
 
   const onSubmit = async (data: any) => {
-    const response = await apiAuthPost('/api/auth/login', data)
+    setLoading(true);
+    try {
+      const response = await apiAuthPost('/api/auth/login', data)
 
-    if (response.status === 200) {
-      login()
+      if (response.status === 200) {
+        login()
+        window.location.reload(); 
+      } else {
+        setLoading(false);
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("Something went wrong! Please try again later.")
     }
   };
 
@@ -48,10 +61,10 @@ const LoginForm = () => {
 
         {/* Login Button */}
         <button
-          type="submit"
-          className="cursor-pointer w-full rounded-md bg-green-600 px-4 py-2 text-white transition hover:bg-green-700"
+          type={loading ? 'button' : 'submit'}
+          className={`cursor-pointer w-full rounded-md ${loading ? 'bg-green-700' : 'bg-green-600'} px-4 py-2 text-white transition hover:bg-green-700`}
         >
-          Login
+          { loading ? 'Submitting...' : 'Login' }
         </button>
 
         {/* Extra Options */}
