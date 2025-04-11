@@ -6,6 +6,7 @@ interface MenuDropdownProps {
 }
 
 const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointmentId }) => {
+  console.log(appointmentId);
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
