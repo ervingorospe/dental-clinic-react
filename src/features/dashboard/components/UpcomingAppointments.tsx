@@ -5,13 +5,8 @@ import MenuDropdown from '@features/dashboard/components/MenuDropdown'
 import { Link } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 import { RootState, AppDispatch } from '@redux/store'
-import { format } from 'date-fns';
+import { formattedDate } from '@utils/formatter'
 import { Status } from '@features/dashboard/constants';
-
-const formattedDate = (date: string) => {
-  const parsedDate = new Date(date);
-  return format(parsedDate, 'MMMM dd, yyyy');
-};
 
 const UpcomingAppointments = () => {
   const { user } = useAuth()

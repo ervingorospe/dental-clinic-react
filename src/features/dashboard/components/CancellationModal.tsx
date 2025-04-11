@@ -33,7 +33,7 @@ const CancellationModal: React.FC<CancellationModalProps> = ({ open, setOpen, ap
       if (response.status === 200) {
         toast.success("You have cancelled your appointment")
         setLoading(false)
-        dispatch(removeAppointment(appointment.id));
+        dispatch(removeAppointment(appointment));
       } else {
         setLoading(false);
         toast.error(response.data.message)
