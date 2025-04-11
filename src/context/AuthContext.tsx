@@ -14,7 +14,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   user: any;
   login: () => void;
-  logout: () => void;
+  logout: () => Promise<boolean>;
   updateUser: (data: IUser) => void;
 }
 
@@ -71,6 +71,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children } : any) =>
     
     setIsAuthenticated(false);
     setUser(null);
+    return true;
   };
 
   if (loading) {

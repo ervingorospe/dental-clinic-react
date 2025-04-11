@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { passwordSchema } from '@features/dashboard/validation'
-import { apiUserPUT } from '@features/dashboard/api/user'
+import { apiPUT } from '@features/dashboard/api/api'
 import { toast } from 'react-toastify';
 
 interface IPassword {
@@ -28,7 +28,7 @@ const PasswordForm = () => {
     setLoading(true)
 
     try {
-      const response = await apiUserPUT(`/api/users/update/password/${user.id}`, data)
+      const response = await apiPUT(`/api/users/update/password/${user.id}`, data)
 
       if (response.status === 200) {
         toast.success("You have changed your password")

@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const mainMenu = [
   {
@@ -27,17 +28,20 @@ const mainMenu = [
 ]
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [collapseShow, setCollapseShow] = React.useState('hidden')
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    logout();
+    if (await logout()) {
+      navigate("/")
+    }
   };
 
   return (
     <>
-      <nav className="relative z-10 flex flex-wrap items-center justify-between bg-white px-6 py-4 shadow-xl md:fixed md:top-0 md:bottom-0 md:left-0 md:block md:w-64 md:flex-row md:flex-nowrap md:overflow-hidden md:overflow-y-auto">
+      <nav className="relative z-10 flex w-full items-center justify-between bg-white px-6 py-4 shadow-xl md:fixed md:top-0 md:bottom-0 md:left-0 md:block md:w-64 md:flex-row md:flex-nowrap md:overflow-hidden md:overflow-y-auto">
         <div className="mx-auto flex w-full flex-wrap items-center justify-between px-0 md:min-h-full md:flex-col md:flex-nowrap md:items-stretch">
 
           <button

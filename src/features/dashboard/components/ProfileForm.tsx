@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { profileSchema } from '@features/dashboard/validation'
 import { format } from 'date-fns';
-import { apiUserPUT } from '@features/dashboard/api/user'
+import { apiPUT } from '@features/dashboard/api/api'
 import { toast } from 'react-toastify';
 
 interface IProfile {
@@ -46,7 +46,7 @@ const ProfileForm = () => {
     setLoading(true)
 
     try {
-      const response = await apiUserPUT(`/api/users/update/${user.id}`, data)
+      const response = await apiPUT(`/api/users/update/${user.id}`, data)
 
       if (response.status === 200) {
         toast.success("You have updated your profile")

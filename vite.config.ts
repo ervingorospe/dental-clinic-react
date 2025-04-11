@@ -20,7 +20,8 @@ export default defineConfig(({ mode }) => {
         '@utils': path.resolve(__dirname, 'src/utils'),
         "@context": path.resolve(__dirname, 'src/context'),
         "@layouts": path.resolve(__dirname, 'src/layouts'),
-        "@pages": path.resolve(__dirname, 'src/pages')
+        "@pages": path.resolve(__dirname, 'src/pages'),
+        "@redux": path.resolve(__dirname, 'src/redux')
       },
     },
   };
