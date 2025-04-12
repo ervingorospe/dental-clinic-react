@@ -3,15 +3,18 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import React from 'react';
 import CancellationModal from '@features/dashboard/components/CancellationModal'
 import ViewAppointmenModalProps from '@features/dashboard/components/ViewAppointmentModal'
+import CompleteModal from '@features/dashboard/components/CompleteModal'
 import { Link } from 'react-router-dom';
 import { Status } from '@features/dashboard/constants';
-
+import { useAuth } from '@context/AuthContext';
 interface MenuDropdownProps {
   appointment: any;
 }
 
 const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointment }) => {
+  const { user } = useAuth()
   const [open, setOpen] = useState(false)
+  const [complete, setComplete] = useState(false)
   const [view, setView] = useState(false)
 
   return (
@@ -55,14 +58,27 @@ const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointment }) => {
                   Cancel
                 </button>
               </MenuItem>
+
+              {
+                user.role === 'doctor' && (
+                  <MenuItem>
+                  <button
+                    onClick={() => setComplete(true)}
+                    className="block px-4 py-2 text-sm text-left cursor-pointer text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden w-full"
+                  >
+                    Complete
+                  </button>
+                </MenuItem>
+                )
+              }
             </>
           )
         }
-        
       </MenuItems>
 
       <CancellationModal open={open} setOpen={setOpen} appointment={appointment}/>
       <ViewAppointmenModalProps  view={view} setView={setView} appointment={appointment}/>
+      <CompleteModal open={complete} setOpen={setComplete} appointment={appointment}/>
     </Menu>
   )
 }

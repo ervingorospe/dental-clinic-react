@@ -1,5 +1,4 @@
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { formattedDate } from '@utils/formatter'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import AppointmentDetails from '@features/dashboard/components/AppointmentDetails'
 
 interface ViewAppointmenModalProps {
