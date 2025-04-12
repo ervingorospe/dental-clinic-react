@@ -26,12 +26,20 @@ const initialState: UsersState = {
 export const fetchUsers = createAsyncThunk(
   'users/fetchUsers',
   async (
-    { role, limit }: { role: string; limit: number },
+    { role, limit }: { role: string; limit?: number | null },
     { rejectWithValue }
   ) => {
+    const params: Record<string, string> = { role };
+
+    if (limit !== null && limit !== undefined) {
+      params.limit = limit.toString();
+    }
+
+    const queryString = new URLSearchParams(params).toString();
+
     try {
       const response = await apiGET(
-        `/api/users?role=${role}&limit=${limit}`
+        `/api/users?${queryString}`
       );
 
       if (response.status === 200) {

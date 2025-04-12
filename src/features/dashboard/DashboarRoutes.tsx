@@ -4,6 +4,7 @@ import DashboardLayout from '@layouts/DashboardLayout';
 import ProfilePage from '@features/dashboard/pages/ProfilePage';
 import HomePage from '@features/dashboard/pages/HomePage';
 import NotFoundPage from '@pages/NotFoundPage'
+import BookingPage from '@features/dashboard/pages/BookingPage'
 
 const DashboardRoutes = () => {
   return (
@@ -29,6 +30,14 @@ const DashboardRoutes = () => {
         element={
           <DashboardLayout>
             <ProfilePage />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path="/booking"
+        element={
+          <DashboardLayout>
+            <BookingPage />
           </DashboardLayout>
         }
       />

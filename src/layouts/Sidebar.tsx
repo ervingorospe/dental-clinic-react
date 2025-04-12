@@ -16,11 +16,6 @@ const mainMenu = [
     route: '/dashboard'
   },
   {
-    title: 'Book',
-    icon: 'fa-solid fa-calendar-check',
-    route: '/book'
-  },
-  {
     title: 'Profile',
     icon: 'fa-solid fa-user',
     route: '/profile'
@@ -87,6 +82,12 @@ const Sidebar = () => {
             </div>
 
             <hr className="w-full border-gray-600"/>
+
+            <div className="mt-8 lg:mt-6">
+              <Link to="/booking" className="bg-green-600 rounded-md hover:bg-green-700 text-white px-4 py-2 text-center">
+                Set an Appointment
+              </Link>
+            </div>
 
             <ul className="mt-4 lg:mt-6 flex list-none flex-col md:min-w-full md:flex-col">
               {mainMenu?.map((menu: any) => (
