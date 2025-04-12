@@ -127,7 +127,7 @@ const RegisterForm = () => {
 
         {/* Password Input */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Password</label>
+          <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
           <input
             type="password"
             {...register('confirmPassword')}
