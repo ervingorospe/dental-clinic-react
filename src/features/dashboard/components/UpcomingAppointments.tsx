@@ -79,7 +79,7 @@ const UpcomingAppointments = () => {
       
       <hr className="border-b border-green-600 my-4"/>
 
-      <Link to="/appointmentts" className="text-sm text-white bg-green-600 hover:bg-green-700 py-2 px-4 rounded-md">
+      <Link to="/appointments" className="text-sm text-white bg-green-600 hover:bg-green-700 py-2 px-4 rounded-md">
         View More
       </Link>
     </div>
