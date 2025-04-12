@@ -6,14 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 const mainMenu = [
   {
-    title: 'Home',
-    icon: 'fa-solid fa-house',
-    route: '/'
-  },
-  {
     title: 'Dashboard',
     icon: 'fa-solid fa-table-columns',
-    route: '/dashboard'
+    route: '/'
   },
   {
     title: 'Appointments',
