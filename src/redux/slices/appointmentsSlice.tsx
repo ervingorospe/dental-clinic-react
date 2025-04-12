@@ -41,13 +41,13 @@ const initialState: AppointmentsState = {
 export const fetchAppointments = createAsyncThunk(
   'appointments/fetchAppointments',
   async (
-    { userId, status, limit }: { userId: number; status: string; limit: number },
+    { path = '/api/appointments', userId, status, limit }: { path?: string, userId?: number | string; status: string; limit: number },
     { rejectWithValue }
   ) => {
     try {
       const startDate = new Date().toISOString();
       const response = await apiGET(
-        `/api/appointments/${userId}?status=${status}&startDate=${startDate}&limit=${limit}`
+        `${path}/${userId}?status=${status}&startDate=${startDate}&limit=${limit}`
       );
 
       if (response.status === 200) {
