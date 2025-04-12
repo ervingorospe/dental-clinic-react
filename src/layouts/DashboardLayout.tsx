@@ -1,6 +1,5 @@
 import Sidebar from '@layouts/Sidebar';
 import { Outlet } from "react-router-dom";
-import Footer from '@layouts/Footer'
 import DashboardNavbar from '@layouts/DashboardNavbar'
 
 const DashboardLayout = () => {
@@ -11,7 +10,6 @@ const DashboardLayout = () => {
         <DashboardNavbar/>
         <Outlet/>
       </div>
-      <Footer/>
     </>
   )
 };
