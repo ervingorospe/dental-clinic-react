@@ -6,14 +6,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { format } from "date-fns";
 import { calendarEvents } from '@utils/calendar'
 import { RootState } from '@redux/store'
-
-interface User {
-  id: number,
-  firstName: string;
-  lastName: string;
-  role: string;
-  active: boolean;
-}
+import { User } from '@features/dashboard/interaces'
 interface CalendarProps {
   selectedUser: User | null;
   setSelectedDatetime: any;

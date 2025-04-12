@@ -18,7 +18,7 @@ export const calendarEvents = (appointments?: any[]) => {
   const calendarEvents: any = [];
   
   // Get the next 60 days and generate events for each day (excluding Sunday)
-  for (let i = 1; i < 3; i++) {
+  for (let i = 1; i < 60; i++) {
     const currentDay = new Date();
     currentDay.setDate(currentDay.getDate() + i);
     

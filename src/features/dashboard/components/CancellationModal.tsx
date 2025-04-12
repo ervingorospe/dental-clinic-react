@@ -5,7 +5,9 @@ import { apiPUT } from '@features/dashboard/api/api'
 import { toast } from 'react-toastify';
 import { useAuth } from '@context/AuthContext';
 import { useDispatch } from 'react-redux';
-import { removeAppointment } from '@redux/slices/appointmentsSlice';
+import { fetchAppointments } from '@redux/slices/appointmentsSlice';
+import { Status } from '@features/dashboard/constants';
+import { AppDispatch } from '@redux/store';
 
 interface CancellationModalProps {
   open: boolean;
@@ -15,7 +17,7 @@ interface CancellationModalProps {
 
 const CancellationModal: React.FC<CancellationModalProps> = ({ open, setOpen, appointment }) => {
   const { user } = useAuth()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [reason, setReason] = useState('');
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +35,14 @@ const CancellationModal: React.FC<CancellationModalProps> = ({ open, setOpen, ap
       if (response.status === 200) {
         toast.success("You have cancelled your appointment")
         setLoading(false)
-        dispatch(removeAppointment(appointment));
+        setOpen(false)
+        
+        const userId = user.id;
+        const status = Status.CONFIRMED.toString();
+        const limit = 10; 
+        const startDate = new Date().toISOString()
+    
+        dispatch(fetchAppointments({ userId, status, limit, startDate }));
       } else {
         setLoading(false);
         toast.error(response.data.message)

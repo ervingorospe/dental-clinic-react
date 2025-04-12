@@ -11,14 +11,7 @@ import { Status } from '@features/dashboard/constants';
 import { useAuth } from '@context/AuthContext';
 import { apiPOST } from '@features/dashboard/api/api'
 import { toast } from 'react-toastify';
-
-interface User {
-  id: number,
-  firstName: string;
-  lastName: string;
-  role: string;
-  active: boolean;
-}
+import { User, Datetime } from '@features/dashboard/interaces';
 
 interface Service {
   id: string;
@@ -31,11 +24,6 @@ interface Service {
   };
 }
 
-interface Datetime {
-  date: string;
-  startTime: string;
-  endTime: string;
-}
 
 const BookingPage = () => {
   const { user } = useAuth()

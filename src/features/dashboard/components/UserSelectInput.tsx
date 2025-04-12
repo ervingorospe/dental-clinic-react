@@ -1,15 +1,7 @@
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
-
-interface User {
-  id: number,
-  firstName: string;
-  lastName: string;
-  role: string;
-  active: boolean;
-}
-
+import { User } from '@features/dashboard/interaces'
 interface UserSelectInputProps {
   selectedUser: User | null;
   users: any;

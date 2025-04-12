@@ -14,12 +14,19 @@ const UpcomingAppointments = () => {
   const appointments = useSelector((state: RootState) => state.appointments.appointments);
   const loading = useSelector((state: RootState) => state.appointments.loading);
 
+  const upcomingAppointments = appointments.filter(appointment => {
+    const isConfirmed = appointment.status === 'CONFIRMED';
+    const isFutureDate = new Date(appointment.date) > new Date();
+    return isConfirmed && isFutureDate;
+  });
+
   useEffect(() => {
     const userId = user.id;
     const status = Status.CONFIRMED.toString();
     const limit = 10; 
+    const startDate = new Date().toISOString()
 
-    dispatch(fetchAppointments({ userId, status, limit }));
+    dispatch(fetchAppointments({ userId, status, limit, startDate }));
   }, [dispatch]);
 
   if (loading) {
@@ -33,10 +40,19 @@ const UpcomingAppointments = () => {
 
       <ul>
         {
-          appointments?.map((data: any) => {
+          upcomingAppointments?.map((data: any) => {
             return (
               <li className="font-semibold border-b border-gray-400 last:border-none py-6" key={data.id}>
-                <h3 className="text-base md:text-lg text-gray-600">{data.doctor.firstName} {data.doctor.lastName}</h3>
+                {
+                  user.role === 'patient' ? (
+                    <h3 className="text-base md:text-lg text-gray-600">Doctor: {data.doctor.firstName} {data.doctor.lastName}</h3>
+                  )
+                  :
+                  (
+                    <h3 className="text-base md:text-lg text-gray-600">Patient: {data.patient.firstName} {data.patient.lastName}</h3>
+                  )
+                }
+                
                 <div className="flex justify-between items-start">
                   <div className="font-semibold">
                     <p className="text-xs md:text-sm text-green-600">{ formattedDate(data.date) } at { data.startTime } - { data.endTime }</p>
@@ -54,7 +70,7 @@ const UpcomingAppointments = () => {
         }
 
         {
-          (!appointments || appointments.length ===0) &&
+          (!upcomingAppointments || upcomingAppointments.length === 0) &&
           (
             <li className="text-gray-600 italic text-sm">No Upcoming Appointments</li>
           ) 

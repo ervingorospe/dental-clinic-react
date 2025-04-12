@@ -1,33 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { apiGET } from '@features/dashboard/api/api';
 import { toast } from 'react-toastify';
-
-interface Service {
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-}
-
-interface User {
-  firstName: string;
-  lastName: string;
-  role: string;
-}
-
-interface Appointment {
-  id: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  status: string | null;
-  notes: string | null;
-  canceledAt: string;
-  service: Service;
-  patient: User;
-  doctor: User;
-}
-
+import { Appointment } from '@features/dashboard/interaces';
 interface AppointmentsState {
   appointments: Appointment[];
   loading: boolean;
@@ -41,13 +15,28 @@ const initialState: AppointmentsState = {
 export const fetchAppointments = createAsyncThunk(
   'appointments/fetchAppointments',
   async (
-    { path = '/api/appointments', userId, status, limit }: { path?: string, userId?: number | string; status: string; limit: number },
+    { path = '/api/appointments/list', userId, status, limit, startDate }: { path?: string, userId?: number | string; status?: string; limit?: number, startDate?: string },
     { rejectWithValue }
   ) => {
+    const params: Record<string, string> = {};
+
+    if (startDate !== null && startDate !== undefined) {
+      params.startDate = startDate
+    }
+
+    if (limit !== null && limit !== undefined) {
+      params.limit = limit.toString();
+    }
+
+    if (status !== null && status !== undefined) {
+      params.status = status;
+    }
+
+    const queryString = new URLSearchParams(params).toString();
+
     try {
-      const startDate = new Date().toISOString();
       const response = await apiGET(
-        `${path}/${userId}?status=${status}&startDate=${startDate}&limit=${limit}`
+        `${path}/${userId}?${queryString}`
       );
 
       if (response.status === 200) {

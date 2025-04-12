@@ -3,6 +3,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import React from 'react';
 import CancellationModal from '@features/dashboard/components/CancellationModal'
 import ViewAppointmenModalProps from '@features/dashboard/components/ViewAppointmentModal'
+import { Link } from 'react-router-dom';
+import { Status } from '@features/dashboard/constants';
 
 interface MenuDropdownProps {
   appointment: any;
@@ -33,22 +35,30 @@ const MenuDropdown: React.FC<MenuDropdownProps> = ({ appointment }) => {
             View
           </button>
         </MenuItem>
-        <MenuItem>
-          <a
-            href="#"
-            className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-          >
-            Reschedule
-          </a>
-        </MenuItem>
-        <MenuItem>
-          <button
-            onClick={() => setOpen(true)}
-            className="block px-4 py-2 text-sm text-left cursor-pointer text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden w-full"
-          >
-            Cancel
-          </button>
-        </MenuItem>
+
+        {
+          appointment.status === Status.CONFIRMED && (
+            <>
+              <MenuItem>
+                <Link
+                  to={`/reschedule/${appointment.id}`}
+                  className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                >
+                  Reschedule
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <button
+                  onClick={() => setOpen(true)}
+                  className="block px-4 py-2 text-sm text-left cursor-pointer text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden w-full"
+                >
+                  Cancel
+                </button>
+              </MenuItem>
+            </>
+          )
+        }
+        
       </MenuItems>
 
       <CancellationModal open={open} setOpen={setOpen} appointment={appointment}/>
