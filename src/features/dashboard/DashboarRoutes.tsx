@@ -13,51 +13,33 @@ const DashboardRoutes = () => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <DashboardLayout>
-            <DashboardPage />
-          </DashboardLayout>
+      <Route element={<DashboardLayout />}>
+        <Route
+          path="/"
+          element={ <DashboardPage />}
+        />
+        <Route
+          path="/profile"
+          element={<ProfilePage />}
+        />
+        {
+          user.role !== 'doctor' && (
+            <Route
+              path="/booking"
+              element={<BookingPage />}
+            />
+          )
         }
-      />
-      <Route
-        path="/profile"
-        element={
-          <DashboardLayout>
-            <ProfilePage />
-          </DashboardLayout>
-        }
-      />
-      {
-        user.role !== 'doctor' && (
-          <Route
-            path="/booking"
-            element={
-              <DashboardLayout>
-                <BookingPage />
-              </DashboardLayout>
-            }
-          />
-        )
-      }
-      
-      <Route
-        path="/reschedule/:appointmentId"
-        element={
-          <DashboardLayout>
-            <ReschedulePage />
-          </DashboardLayout>
-        }
-      />
-      <Route
-        path="/appointments"
-        element={
-          <DashboardLayout>
-            <AppointmentsPage />
-          </DashboardLayout>
-        }
-      />
+        
+        <Route
+          path="/reschedule/:appointmentId"
+          element={<ReschedulePage />}
+        />
+        <Route
+          path="/appointments"
+          element={<AppointmentsPage />}
+        />
+      </Route>
       
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

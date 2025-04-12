@@ -2,12 +2,18 @@ import { Route, Routes } from 'react-router-dom';
 import LoginPage from '@auth/pages/LoginPage';
 import RegisterPage from '@features/auth/pages/RegisterPage'
 import NotFoundPage from '@pages/NotFoundPage'
+import HomePage from '@pages/Homepage';
+import DefaultLayout from '@layouts/DefaultLayout'
 
 const AuthRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage/>} />
+      <Route element={<DefaultLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage/>} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

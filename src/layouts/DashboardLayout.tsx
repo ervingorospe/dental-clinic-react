@@ -1,18 +1,17 @@
-import React, { ReactNode } from 'react';
 import Sidebar from '@layouts/Sidebar';
+import { Outlet } from "react-router-dom";
+import Footer from '@layouts/footer'
+import DashboardNavbar from '@layouts/DashboardNavbar'
 
-interface DashboardLayoutProps {
-  children: ReactNode;
-}
-
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout = () => {
   return (
     <>
       <Sidebar />
       <div className="relative md:ml-64">
-        {/* <Navbar /> */}
-        {children}
+        <DashboardNavbar/>
+        <Outlet/>
       </div>
+      <Footer/>
     </>
   )
 };

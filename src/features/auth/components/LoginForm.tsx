@@ -24,7 +24,7 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         login()
-        window.location.reload(); 
+        window.location.href = "/";
       } else {
         setLoading(false);
         toast.error(response.data.message)
