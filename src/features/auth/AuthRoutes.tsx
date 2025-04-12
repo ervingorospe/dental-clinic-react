@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import LoginPage from '@auth/pages/LoginPage';
 import RegisterPage from '@features/auth/pages/RegisterPage'
 import NotFoundPage from '@pages/NotFoundPage'
-import HomePage from '@pages/Homepage';
+import HomePage from '@pages/HomePage';
 import DefaultLayout from '@layouts/DefaultLayout'
 
 const AuthRoutes = () => {
