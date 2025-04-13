@@ -47,6 +47,9 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 3000
+    - protocol: TCP
+      port: 443
+      targetPort: 3000
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -65,6 +68,13 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dental-clinic-app
+                port:
+                  number: 80
+          - path: /healthcheck
             pathType: Prefix
             backend:
               service:
