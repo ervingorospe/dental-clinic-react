@@ -40,38 +40,10 @@ metadata:
   name: dental-clinic-app
   namespace: dental-clinic-app
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: dental-clinic-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
-
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: dental-clinic-app-ingress
-  namespace: dental-clinic-app
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-southeast-2:412631849473:certificate/e0ade39d-5081-4323-ad45-0c1902873d6c
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-path: /
-spec:
-  ingressClassName: alb
-  rules:
-    - host: dental-clinic-app.myprofilely.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: dental-clinic-app
-                port:
-                  number: 80
-
