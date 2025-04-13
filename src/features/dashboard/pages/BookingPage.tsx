@@ -45,9 +45,6 @@ const BookingPage = () => {
     dispatch(fetchServices({}))
   }, [dispatch]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   const handleSubmit = async () => {
     let tempErrors = {};
@@ -102,63 +99,65 @@ const BookingPage = () => {
     }
   }
 
-  return (
-    <div className="min-h-screen items-center">
-      <div className="grid gap-20 px-6 lg:px-16 py-8 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-4grid xl:grid-cols-[2fr_3fr] gap-8">
-          <div className="w-full">
-            <div className="mt-16 grid gap-6 w-full">
-              <div className="text-lg font-bold text-gray-600">
-                <p>To start select a Doctor to view available Date and Time</p>
-              </div>
-              <div>
-                <UserSelectInput selectedUser={selectedUser} users={users} setSelectedUser={setSelectedUser}/>
-                {errors.user && <p className="mt-1 text-sm text-red-500">{errors.user}</p>}
-              </div>
-              <div>
-                <ServiceSelectInput selectedService={selectedService} setSelectedService={setSelectedService} services={services}/>
-                {errors.service && <p className="mt-1 text-sm text-red-500">{errors.service}</p>}
-                {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
-              </div>
-              <div className="text-sm text-gray-600 tracking-wide space-y-2">
-                {
-                  selectedUser && (
-                    <>
-                      <p><strong>Doctor:</strong> { selectedUser.firstName } { selectedUser.lastName }</p>
-                    </>
-                  )
-                }
-
-                {
-                  selectedDatetime && (
-                    <>
-                      <p><strong>Date:</strong> { formattedDate(selectedDatetime.date) }</p>
-                      <p><strong>Time:</strong> { selectedDatetime.startTime } - { selectedDatetime.endTime }</p>
-                    </>
-                  )
-                }
-
-                {
-                  selectedService && (
-                    <>
-                      <p><strong>Purpose:</strong> { selectedService.category.name } - { selectedService.name }</p>
-                      <p><strong>Description:</strong> { selectedService.description }</p>
-                      <p><strong>Price:</strong> ${ selectedService.price }</p>
-                    </>
-                  )
-                }
-
-                <button onClick={() => handleSubmit()} disabled={isLoading} className="mt-6 cursor-pointer inline-flex bg-green-600 rounded-md hover:bg-green-700 text-white px-4 py-2 text-center">
-                  {isLoading ? 'Submitting' : 'Book Appointment'}
-                </button>
+  if (!loading) {
+    return (
+      <div className="min-h-screen items-center">
+        <div className="grid gap-20 px-6 lg:px-16 py-8 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-4grid xl:grid-cols-[2fr_3fr] gap-8">
+            <div className="w-full">
+              <div className="mt-16 grid gap-6 w-full">
+                <div className="text-lg font-bold text-gray-600">
+                  <p>To start select a Doctor to view available Date and Time</p>
+                </div>
+                <div>
+                  <UserSelectInput selectedUser={selectedUser} users={users} setSelectedUser={setSelectedUser}/>
+                  {errors.user && <p className="mt-1 text-sm text-red-500">{errors.user}</p>}
+                </div>
+                <div>
+                  <ServiceSelectInput selectedService={selectedService} setSelectedService={setSelectedService} services={services}/>
+                  {errors.service && <p className="mt-1 text-sm text-red-500">{errors.service}</p>}
+                  {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
+                </div>
+                <div className="text-sm text-gray-600 tracking-wide space-y-2">
+                  {
+                    selectedUser && (
+                      <>
+                        <p><strong>Doctor:</strong> { selectedUser.firstName } { selectedUser.lastName }</p>
+                      </>
+                    )
+                  }
+  
+                  {
+                    selectedDatetime && (
+                      <>
+                        <p><strong>Date:</strong> { formattedDate(selectedDatetime.date) }</p>
+                        <p><strong>Time:</strong> { selectedDatetime.startTime } - { selectedDatetime.endTime }</p>
+                      </>
+                    )
+                  }
+  
+                  {
+                    selectedService && (
+                      <>
+                        <p><strong>Purpose:</strong> { selectedService.category.name } - { selectedService.name }</p>
+                        <p><strong>Description:</strong> { selectedService.description }</p>
+                        <p><strong>Price:</strong> ${ selectedService.price }</p>
+                      </>
+                    )
+                  }
+  
+                  <button onClick={() => handleSubmit()} disabled={isLoading} className="mt-6 cursor-pointer inline-flex bg-green-600 rounded-md hover:bg-green-700 text-white px-4 py-2 text-center">
+                    {isLoading ? 'Submitting' : 'Book Appointment'}
+                  </button>
+                </div>
               </div>
             </div>
+            <BookingCalendar selectedUser={selectedUser} setSelectedDatetime={setSelectedDatetime}/>
           </div>
-          <BookingCalendar selectedUser={selectedUser} setSelectedDatetime={setSelectedDatetime}/>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default BookingPage;

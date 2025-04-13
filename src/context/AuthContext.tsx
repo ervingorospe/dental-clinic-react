@@ -74,15 +74,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children } : any) =>
     return true;
   };
 
-  if (loading) {
+  if (!loading) {
     return (
-      <div>Loading....</div>
-    )
+      <AuthContext.Provider value={{ isAuthenticated, user, login, logout, updateUser }}>
+        {children}
+      </AuthContext.Provider>
+    );
   }
-
-  return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, updateUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
 };
