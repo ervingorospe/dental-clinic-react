@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: dental-clinic-app
-          image: 412631849473.dkr.ecr.ap-southeast-2.amazonaws.com/dental-clinic-app:latest
+          image: 412631849473.dkr.ecr.ap-southeast-2.amazonaws.com/dental-clinic-react:latest
           ports:
             - containerPort: 3000
           env:
